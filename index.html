@@ -1,35 +1,161 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Flight Tracker</title>
-  <meta name="description" content="Flight tracking portal">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Felix's Flights · Office of Felix Feger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f2ea;--bg2:#ece5d3;--ink:#3b372f;--mute:#77705f;--teal:#3f6d73;--line:#d8d0bd;--card:#f5f2ea;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1d19;--bg2:#2a2721;--ink:#efe9da;--mute:#b4ab96;--teal:#8bbcc2;--line:#403b31;--card:#1f1d19}}
+:root[data-theme="dark"]{--bg:#1f1d19;--bg2:#2a2721;--ink:#efe9da;--mute:#b4ab96;--teal:#8bbcc2;--line:#403b31;--card:#1f1d19}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Inter,system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2,h3,.brand b{font-family:Fredoka,"Trebuchet MS",sans-serif;font-weight:500;line-height:1.15;margin:0}
+a{color:var(--teal)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+.brand .lg{width:48px;height:48px;display:grid;place-items:center}
+.brand img,.brand svg{width:48px;height:48px;object-fit:contain}
+.brand span{border-left:2px solid var(--ink);padding-left:14px;font-size:15px;line-height:1.15;display:block}
+.brand b{display:block;font-size:20px;font-weight:600}
+#burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:48px;height:48px;cursor:pointer;color:var(--ink)}
+nav{display:flex;gap:6px}
+nav a{color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:999px}
+nav a[aria-current="page"]{background:var(--bg2)}
+nav a:hover{background:var(--bg2)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+@media(max-width:680px){
+ #burger{display:block}
+ nav{display:none;flex-direction:column;padding:0 20px 14px;max-width:960px;margin:auto}
+ nav.open{display:flex}
+ nav a{padding:12px 14px}
+ .bar{padding-bottom:14px}
+}
+.hero{text-align:center;padding:72px 24px 96px;max-width:720px;margin:auto}
+.hero svg.waves{width:96px;height:auto;margin-bottom:36px}
+h1{font-size:clamp(40px,9vw,64px);margin-bottom:20px}
+.lead{color:var(--mute);font-size:clamp(19px,3.5vw,24px);margin:0 auto 36px;max-width:30ch}
+.btn{display:inline-block;border:2px solid var(--ink);color:var(--ink);text-decoration:none;font:500 18px Fredoka,sans-serif;padding:16px 44px;border-radius:999px;margin:6px}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.fill{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.fill:hover{filter:brightness(1.1);background:var(--teal);color:#fff}
+.sect{background:var(--bg2);position:relative;padding:40px 20px 80px;margin-top:0}
+.wave{display:block;width:100%;height:44px;margin-bottom:-1px}
+.grid{max-width:960px;margin:auto;display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);padding:32px 30px}
+.card h3{font-size:26px;margin-bottom:12px}
+.card p{color:var(--mute);margin:0 0 18px}
+.card a.more{font:500 18px Fredoka,sans-serif;text-decoration:none}
+.page{max-width:720px;margin:auto;padding:56px 24px 96px}
+.page h1{font-size:clamp(36px,8vw,52px);margin-bottom:20px}
+.page h2{font-size:26px;margin:40px 0 10px}
+.page p{color:var(--mute);margin:0 0 16px}
+.page ul{color:var(--mute);padding-left:22px}
+.page li{margin-bottom:8px}
+.note{border:1px solid var(--line);background:var(--bg2);padding:20px 22px;margin:28px 0}
+footer{background:var(--bg2);border-top:1px solid var(--line);text-align:center;padding:32px 20px;color:var(--mute);font-size:15px}
+footer a{margin:0 8px}
+.route{display:none}.route.on{display:block}
+</style>
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="index.html">Flight Tracker</a>
-  <button class="menu" aria-label="Open menu" onclick="toggleMenu()">☰</button>
-  <nav id="nav">
-    <a class="active" href="index.html">Home</a>
-    <a href="tracker.html">Tracker</a>
-    <a href="about.html">About</a>
-  </nav>
+<header>
+ <div class="bar">
+  <a class="brand" href="#/" aria-label="Felix's Flights home">
+   <div class="lg" id="lg">
+    <img src="https://web.felixfeger.com/logo.png" alt="" onerror="this.replaceWith(document.getElementById('bear').content.cloneNode(true))">
+   </div>
+   <span>Office of<b>Felix Feger</b></span>
+  </a>
+  <button id="burger" aria-label="Menu" aria-expanded="false">
+   <svg width="30" height="24" viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 4h26M2 12h26M2 20h26"/></svg>
+  </button>
+ </div>
+ <nav id="nav">
+  <a href="#/">Home</a><a href="#/flights">My flights</a><a href="#/about">About</a><a href="#/links">Links</a>
+ </nav>
 </header>
 
+<template id="bear"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="24" r="12"/><circle cx="78" cy="24" r="12"/><circle cx="50" cy="56" r="36"/><circle cx="38" cy="50" r="2.5" fill="currentColor"/><circle cx="62" cy="50" r="2.5" fill="currentColor"/><path d="M44 62h12l-6 8z"/></svg></template>
+
 <main>
-  <section class="hero">
-    <div>
-      <p class="eyebrow">LIVE FLIGHT TRACKING</p>
-      <h1>Track flights from your own website.</h1>
-      <p class="lead">A clean custom-domain front end for your flight-tracking page.</p>
-      <a class="button" href="tracker.html">Open Tracker</a>
-    </div>
-  </section>
+ <section class="route" data-r="/">
+  <div class="hero">
+   <svg class="waves" viewBox="0 0 96 48" fill="none" stroke="var(--teal)" stroke-width="4" stroke-linecap="round" aria-hidden="true"><path d="M4 12c8-10 14-10 22 0s14 10 22 0 14-10 22 0 14 10 20 4M4 24c8-10 14-10 22 0s14 10 22 0 14-10 22 0 14 10 20 4M4 36c8-10 14-10 22 0s14 10 22 0 14-10 22 0 14 10 20 4"/></svg>
+   <h1>Hi, I’m Felix!</h1>
+   <p class="lead">This is where I keep my flight tracking on Flightradar24.</p>
+   <a class="btn" href="#/flights">My flights</a>
+  </div>
+  <svg class="wave" viewBox="0 0 1400 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 44V22C200 -6 420 34 700 20S1150 -4 1400 26V44Z" fill="var(--bg2)"/></svg>
+  <div class="sect">
+   <div class="grid">
+    <div class="card"><h3>My flights</h3><p>Open my public Flightradar24 profile to see the flights I’ve logged.</p><a class="more" href="#/flights">See my flights ›</a></div>
+    <div class="card"><h3>About</h3><p>Who I am and why I track flights.</p><a class="more" href="#/about">Read more ›</a></div>
+    <div class="card"><h3>Main website</h3><p>Travel photos, projects, and everything else live on felixfeger.com.</p><a class="more" href="https://felixfeger.com">Go to felixfeger.com ›</a></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="route" data-r="/flights">
+  <div class="page">
+   <h1>My flights</h1>
+   <p>My flight history is kept on Flightradar24 under the username <strong>felixthecatalt1</strong>. The profile is the live source, so it is always up to date.</p>
+   <p><a class="btn fill" href="https://my.flightradar24.com/felixthecatalt1" target="_blank" rel="noopener">Open my profile</a></p>
+   <h2>What you’ll find there</h2>
+   <ul>
+    <li>Flights I’ve logged</li>
+    <li>Airports and airlines I’ve flown with</li>
+    <li>Aircraft types and total distance</li>
+   </ul>
+   <div class="note">Flightradar24 doesn’t allow its profile pages to be embedded in other sites, so the button opens it in a new tab.</div>
+  </div>
+ </section>
+
+ <section class="route" data-r="/about">
+  <div class="page">
+   <h1>About</h1>
+   <p>I’m Felix: founder of City Metro, occasional traveler, and software developer.</p>
+   <p>This small site is a home for my Flightradar24 profile. It is separate from my main website so my flights have a page of their own.</p>
+   <h2>Want more?</h2>
+   <p>My photos, notes, and projects are on <a href="https://felixfeger.com">felixfeger.com</a>.</p>
+   <p><a class="btn" href="https://felixfeger.com">Visit felixfeger.com</a></p>
+  </div>
+ </section>
+
+ <section class="route" data-r="/links">
+  <div class="page">
+   <h1>Links</h1>
+   <div class="grid" style="grid-template-columns:1fr">
+    <div class="card"><h3>Flightradar24 profile</h3><p>felixthecatalt1 on my.flightradar24.com</p><a class="more" href="https://my.flightradar24.com/felixthecatalt1" target="_blank" rel="noopener">Open profile ›</a></div>
+    <div class="card"><h3>Main website</h3><p>felixfeger.com</p><a class="more" href="https://felixfeger.com">Go to felixfeger.com ›</a></div>
+   </div>
+  </div>
+ </section>
 </main>
 
-<footer>© <span id="year"></span> Flight Tracker</footer>
-<script src="assets/app.js"></script>
+<footer>
+ <a href="#/">Home</a><a href="#/flights">My flights</a><a href="#/about">About</a><a href="https://felixfeger.com">felixfeger.com</a>
+ <div style="margin-top:12px">© Felix Feger</div>
+</footer>
+
+<script>
+(function(){
+ var routes=document.querySelectorAll('.route'),links=document.querySelectorAll('nav a'),nav=document.getElementById('nav'),b=document.getElementById('burger');
+ function go(){
+  var h=(location.hash||'#/').slice(1),found=false;
+  routes.forEach(function(r){var on=r.dataset.r===h;r.classList.toggle('on',on);if(on)found=true});
+  if(!found){document.querySelector('[data-r="/"]').classList.add('on');h='/'}
+  links.forEach(function(a){a.getAttribute('href')==='#'+h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+  nav.classList.remove('open');b.setAttribute('aria-expanded','false');window.scrollTo(0,0);
+ }
+ b.onclick=function(){var o=nav.classList.toggle('open');b.setAttribute('aria-expanded',o)};
+ window.addEventListener('hashchange',go);go();
+})();
+</script>
 </body>
 </html>
