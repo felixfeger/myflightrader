@@ -19,8 +19,12 @@ a{color:var(--teal)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
-.brand .lg{width:48px;height:48px;display:grid;place-items:center}
-.brand img,.brand svg{width:48px;height:48px;object-fit:contain}
+.brand .lg{position:relative;overflow:hidden;width:min(340px,72vw);aspect-ratio:3.88/1}
+.brand .lg img{position:absolute;width:172%;left:-34.9%;top:-60%;height:auto;mix-blend-mode:multiply}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand .lg img{filter:invert(1);mix-blend-mode:screen}}
+:root[data-theme="dark"] .brand .lg img{filter:invert(1);mix-blend-mode:screen}
+.brand .lg.fb{width:64px;height:64px;aspect-ratio:auto}
+.brand .lg.fb svg{width:64px;height:64px}
 .brand span{border-left:2px solid var(--ink);padding-left:14px;font-size:15px;line-height:1.15;display:block}
 .brand b{display:block;font-size:20px;font-weight:600}
 #burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:48px;height:48px;cursor:pointer;color:var(--ink)}
@@ -68,7 +72,7 @@ footer a{margin:0 8px}
  <div class="bar">
   <a class="brand" href="#/" aria-label="Felix's Flights home">
    <div class="lg" id="lg">
-    <img src="https://web.felixfeger.com/logo.png" alt="" onerror="this.replaceWith(document.getElementById('bear').content.cloneNode(true))">
+    <img src="https://web.felixfeger.com/logo.png" alt="" onerror="var p=this.parentNode;p.classList.add('fb');this.replaceWith(document.getElementById('bear').content.cloneNode(true))">
    </div>
   </a>
   <button id="burger" aria-label="Menu" aria-expanded="false">
@@ -103,7 +107,7 @@ footer a{margin:0 8px}
  <section class="route" data-r="/flights">
   <div class="page">
    <h1>My flights</h1>
-   <p>My flight history is powered by myFlightradar24. The profile is the live source, so it is always up to date.</p>
+   <p>My flight history is powered on by myFlightradar24. My profile is the live source, so it is always up to date.</p>
    <p><a class="btn fill" href="https://my.flightradar24.com/felixthecatalt1" target="_blank" rel="noopener">Open my profile</a></p>
    <h2>What you’ll find there</h2>
    <ul>
