@@ -19,7 +19,7 @@ a{color:var(--teal)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
-.brand .lg{position:relative;overflow:hidden;width:min(340px,72vw);aspect-ratio:3.88/1}
+.brand .lg{position:relative;overflow:hidden;width:min(340px,44vw);aspect-ratio:3.88/1}
 .brand .lg img{position:absolute;width:172%;left:-34.9%;top:-60%;height:auto;mix-blend-mode:multiply}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand .lg img{filter:invert(1);mix-blend-mode:screen}}
 :root[data-theme="dark"] .brand .lg img{filter:invert(1);mix-blend-mode:screen}
@@ -64,6 +64,8 @@ h1{font-size:clamp(40px,9vw,64px);margin-bottom:20px}
 .note{border:1px solid var(--line);background:var(--bg2);padding:20px 22px;margin:28px 0}
 footer{background:var(--bg2);border-top:1px solid var(--line);text-align:center;padding:32px 20px;color:var(--mute);font-size:15px}
 footer a{margin:0 8px}
+.embed-container{border:1px solid var(--line);background:var(--bg2);margin:12px 0}
+.embed-container iframe{display:block;width:100%;height:600px;border:0}
 .route{display:none}.route.on{display:block}
 </style>
 </head>
@@ -107,7 +109,7 @@ footer a{margin:0 8px}
  <section class="route" data-r="/flights">
   <div class="page">
    <h1>My flights</h1>
-   <p>My flight history is powered on by myFlightradar24. My profile is the live source, so it is always up to date.</p>
+   <p>My flight history is powered by myFlightradar24. My profile is the live source, so it is always up to date.</p>
    <p><a class="btn fill" href="https://my.flightradar24.com/felixthecatalt1" target="_blank" rel="noopener">Open my profile</a></p>
    <h2>What you’ll find there</h2>
    <ul>
@@ -115,8 +117,11 @@ footer a{margin:0 8px}
     <li>Airports and airlines I’ve flown with</li>
     <li>Aircraft types and total distance</li>
    </ul>
-  <div class="embed-container">
-    <embed src="https://my.flightradar24.com/felixthecatalt1" width="100%" height="600px" type="text/html">
+   <h2>Live profile</h2>
+   <div class="embed-container">
+    <iframe src="https://my.flightradar24.com/felixthecatalt1" title="My Flightradar24 profile" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   </div>
+   <div class="note">If the profile above stays blank, Flightradar24 is blocking embedding. Use the “Open my profile” button instead.</div>
   </div>
  </section>
 
