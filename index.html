@@ -64,8 +64,8 @@ h1{font-size:clamp(40px,9vw,64px);margin-bottom:20px}
 .note{border:1px solid var(--line);background:var(--bg2);padding:20px 22px;margin:28px 0}
 footer{background:var(--bg2);border-top:1px solid var(--line);text-align:center;padding:32px 20px;color:var(--mute);font-size:15px}
 footer a{margin:0 8px}
-.embed-container{border:1px solid var(--line);background:var(--bg2);margin:12px 0}
-.embed-container iframe{display:block;width:100%;height:600px;border:0}
+.embed-container{margin:12px 0}
+.embed-container img{display:block;width:100%;height:auto;border:1px solid var(--line)}
 .route{display:none}.route.on{display:block}
 </style>
 </head>
@@ -117,11 +117,11 @@ footer a{margin:0 8px}
     <li>Airports and airlines I’ve flown with</li>
     <li>Aircraft types and total distance</li>
    </ul>
-   <h2>Live profile</h2>
+   <h2>My banner</h2>
    <div class="embed-container">
-    <iframe src="https://my.flightradar24.com/felixthecatalt1" title="My Flightradar24 profile" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <a href="https://my.flightradar24.com/felixthecatalt1" target="_blank" rel="noopener"><img src="https://banners-my.flightradar24.com/felixthecatalt1.png" alt="My Flightradar24 stats banner" loading="lazy"></a>
    </div>
-   <div class="note">If the profile above stays blank, Flightradar24 is blocking embedding. Use the “Open my profile” button instead.</div>
+   <p>Tap the banner or the button above to see my full profile.</p>
   </div>
  </section>
 
