@@ -16,30 +16,38 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Inter,system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 h1,h2,h3,.brand b{font-family:Fredoka,"Trebuchet MS",sans-serif;font-weight:500;line-height:1.15;margin:0}
 a{color:var(--teal)}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+
+/* --- UPDATED HEADER & NAV STYLES --- */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
+.bar{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:24px 20px;flex-wrap:wrap}
+
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
-.brand .lg{position:relative;width:min(300px,52vw)}
-.brand .lg img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+.brand .lg{display:flex;align-items:center}
+.brand .lg img{display:block;max-height:40px;width:auto;height:auto;mix-blend-mode:multiply}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand .lg img{filter:invert(1);mix-blend-mode:screen}}
 :root[data-theme="dark"] .brand .lg img{filter:invert(1);mix-blend-mode:screen}
-.brand .lg.fb{width:64px;height:64px;aspect-ratio:auto}
-.brand .lg.fb svg{width:64px;height:64px}
+.brand .lg.fb{width:40px;height:40px}
+.brand .lg.fb svg{width:40px;height:40px}
 .brand span{border-left:2px solid var(--ink);padding-left:14px;font-size:15px;line-height:1.15;display:block}
 .brand b{display:block;font-size:20px;font-weight:600}
-#burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:48px;height:48px;cursor:pointer;color:var(--ink)}
-nav{display:flex;gap:6px}
-nav a{color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:999px}
-nav a[aria-current="page"]{background:var(--bg2)}
-nav a:hover{background:var(--bg2)}
+
+#burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:40px;height:40px;cursor:pointer;color:var(--ink);padding:0;align-items:center;justify-content:center}
+
+nav{display:flex;gap:28px;align-items:center}
+nav a{color:var(--mute);text-decoration:none;padding:6px 0;font-weight:500;border-bottom:2px solid transparent;transition:color 0.2s}
+nav a[aria-current="page"]{color:var(--ink);border-bottom:2px solid var(--teal)}
+nav a:hover{color:var(--ink)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
 @media(max-width:680px){
- #burger{display:block}
- nav{display:none;flex-direction:column;padding:0 20px 14px;max-width:960px;margin:auto}
+ #burger{display:flex}
+ nav{display:none;flex-direction:column;width:100%;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);gap:12px}
  nav.open{display:flex}
- nav a{padding:12px 14px}
- .bar{padding-bottom:14px}
+ nav a{padding:4px 0;width:max-content}
+ .bar{padding:16px 20px}
 }
+/* ----------------------------------- */
+
 .hero{text-align:center;padding:72px 24px 96px;max-width:720px;margin:auto}
 .hero svg.waves{width:96px;height:auto;margin-bottom:36px}
 h1{font-size:clamp(40px,9vw,64px);margin-bottom:20px}
@@ -70,6 +78,7 @@ footer a{margin:0 8px}
 </style>
 </head>
 <body>
+
 <header>
  <div class="bar">
   <a class="brand" href="#/" aria-label="Felix's Flights home">
@@ -80,10 +89,10 @@ footer a{margin:0 8px}
   <button id="burger" aria-label="Menu" aria-expanded="false">
    <svg width="30" height="24" viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 4h26M2 12h26M2 20h26"/></svg>
   </button>
+  <nav id="nav">
+   <a href="#/">Home</a><a href="#/flights">My flights</a><a href="#/about">About</a><a href="#/links">Links</a>
+  </nav>
  </div>
- <nav id="nav">
-  <a href="#/">Home</a><a href="#/flights">My flights</a><a href="#/about">About</a><a href="#/links">Links</a>
- </nav>
 </header>
 
 <template id="bear"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="24" r="12"/><circle cx="78" cy="24" r="12"/><circle cx="50" cy="56" r="36"/><circle cx="38" cy="50" r="2.5" fill="currentColor"/><circle cx="62" cy="50" r="2.5" fill="currentColor"/><path d="M44 62h12l-6 8z"/></svg></template>
